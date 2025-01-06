@@ -1,0 +1,8 @@
+Copyright Douglas S. Leonard.  All Rights Reseserved.
+
+Markings on individual files may indicate MIT or such for scripts, etc, and that overrides this notice.
+However, the documents are not open source.  They are not for redistribution, modified or not, without express permission.
+
+Many of the code snippets are fairly generic or even unoriginal taken on their own, and may not rise to the level of 
+even being copyrightable, which is fine.  But the documents as a whole are the intellectual property of the author.
+
