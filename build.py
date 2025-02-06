@@ -5,6 +5,8 @@ import subprocess
 import glob
 import webbrowser
 import pypandoc
+from scripts.add_links import add_links
+
 
 def convert_and_open_notebooks(source_dir, output_dir):
     """Converts notebooks and opens HTML in browser."""
@@ -77,7 +79,7 @@ def markdownToHtml(input_dir, output_dir):
             output_file = os.path.join(output_dir, f'{base_name}.html')
             
             # Convert using pypandoc
-            pypandoc.convert_file(markdown_path, 'html', outputfile=output_file)
+            pypandoc.convert_file(markdown_path, 'html',format='markdown_github', outputfile=output_file)
             
             print(f"Converted {markdown_path} to {output_file}")
 
@@ -85,12 +87,14 @@ def markdownToHtml(input_dir, output_dir):
             webbrowser.open("file://" + os.path.abspath(output_file))
 
 if __name__ == "__main__":
-    #Markdown first	
-    source_directory = "src/markdown"
-    output_directory = "public"  # Relative to the project root
-    markdownToHtml(source_directory,output_directory)
 
-    #Now notebooks
+    output_directory = "public"  # Relative to the project root
+    # Now notebooks
     source_directory = "src/notebooks"
     convert_and_open_notebooks(source_directory, output_directory)
     print("Conversion and opening process finished.")
+
+    ##add_links.add_links()
+    #Parse markdown
+    source_directory = "src/markdown"
+    markdownToHtml(source_directory, output_directory)

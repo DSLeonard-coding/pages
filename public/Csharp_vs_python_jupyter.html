@@ -7825,7 +7825,7 @@ Calling setter  1  times
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">use</span> <span class="o">.</span><span class="n">net</span><span class="o">-</span><span class="n">csharp</span>
@@ -7833,10 +7833,11 @@ Calling setter  1  times
 
 <span class="n">public</span> <span class="k">class</span> <span class="nc">MyClass</span><span class="p">{</span>
     <span class="o">//</span> <span class="n">Public</span> <span class="n">readonly</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">readonly</span> <span class="n">elements</span><span class="o">.</span>
-    <span class="n">public</span> <span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">MyList</span> <span class="p">{</span> <span class="n">get</span><span class="p">;}</span>  <span class="o">//</span> <span class="n">no</span> <span class="n">setter</span><span class="p">,</span> <span class="ow">and</span> <span class="nb">list</span> <span class="n">can</span><span class="s1">'t be modified.</span>
+    <span class="n">public</span> <span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">MyList</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">init</span><span class="p">;}</span> <span class="o">=</span> <span class="p">[];</span>  <span class="o">//</span> <span class="n">no</span> <span class="n">setter</span><span class="p">,</span> <span class="ow">and</span> <span class="nb">list</span> <span class="n">can</span><span class="s1">'t be modified.</span>
 
-    <span class="n">public</span> <span class="n">MyClass</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="nb">list</span><span class="p">){</span>
-        <span class="n">this</span><span class="o">.</span><span class="n">MyList</span><span class="o">=</span><span class="nb">list</span><span class="p">;</span>    <span class="o">//</span><span class="n">No</span> <span class="n">setter</span><span class="p">,</span> <span class="n">but</span> <span class="n">still</span> <span class="n">allowed</span> <span class="ow">in</span> <span class="n">constructor</span>
+    <span class="o">//</span><span class="n">But</span> <span class="n">still</span> <span class="n">can</span> <span class="n">use</span> <span class="n">initializer</span><span class="p">,</span> <span class="ow">and</span><span class="o">/</span><span class="ow">or</span> <span class="n">optional</span> <span class="n">constructor</span> <span class="n">param</span><span class="p">:</span>
+    <span class="n">public</span> <span class="n">MyClass</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">null</span><span class="p">){</span>  
+        <span class="n">this</span><span class="o">.</span><span class="n">MyList</span><span class="o">=</span><span class="nb">list</span><span class="p">;</span>     
     <span class="p">}</span>
 
     <span class="n">public</span> <span class="n">void</span> <span class="n">Print</span><span class="p">(){</span>
@@ -7844,8 +7845,10 @@ Calling setter  1  times
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">var</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyClass</span><span class="p">(</span><span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">});</span>
-<span class="n">obj</span><span class="o">.</span><span class="n">Print</span><span class="p">()</span>  <span class="o">//</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+<span class="n">var</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyClass</span><span class="p">{</span><span class="n">MyList</span><span class="o">=</span><span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}};</span>  <span class="o">//</span> <span class="n">use</span> <span class="n">initializer</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">Print</span><span class="p">();</span>  <span class="o">//</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
+<span class="n">var</span> <span class="n">obj2</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyClass</span><span class="p">(</span><span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">});</span>  <span class="o">//</span> <span class="ow">or</span> <span class="n">constructor</span>
+<span class="n">obj2</span><span class="o">.</span><span class="n">Print</span><span class="p">();</span>  <span class="o">//</span> <span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span>
 </pre></div>
 </div>
 </div>
@@ -7857,119 +7860,9 @@ Calling setter  1  times
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div>
-<div id="dotnet-interactive-this-cell-240650.Microsoft.DotNet.Interactive.Http.HttpPort" style="display: none">
-        The below script needs to be able to find the current output cell; this is an easy method to get it.
-    </div>
-<script type="text/javascript">
-async function probeAddresses(probingAddresses) {
-    function timeout(ms, promise) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                reject(new Error('timeout'))
-            }, ms)
-            promise.then(resolve, reject)
-        })
-    }
-
-    if (Array.isArray(probingAddresses)) {
-        for (let i = 0; i < probingAddresses.length; i++) {
-
-            let rootUrl = probingAddresses[i];
-
-            if (!rootUrl.endsWith('/')) {
-                rootUrl = `${rootUrl}/`;
-            }
-
-            try {
-                let response = await timeout(1000, fetch(`${rootUrl}discovery`, {
-                    method: 'POST',
-                    cache: 'no-cache',
-                    mode: 'cors',
-                    timeout: 1000,
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    },
-                    body: probingAddresses[i]
-                }));
-
-                if (response.status == 200) {
-                    return rootUrl;
-                }
-            }
-            catch (e) { }
-        }
-    }
-}
-
-function loadDotnetInteractiveApi() {
-    probeAddresses(["http://192.168.112.132:2054/", "http://192.168.112.128:2054/", "http://192.168.119.129:2054/", "http://192.168.119.128:2054/", "http://127.0.0.1:2054/"])
-        .then((root) => {
-        // use probing to find host url and api resources
-        // load interactive helpers and language services
-        let dotnetInteractiveRequire = require.config({
-        context: '240650.Microsoft.DotNet.Interactive.Http.HttpPort',
-                paths:
-            {
-                'dotnet-interactive': `${root}resources`
-                }
-        }) || require;
-
-            window.dotnetInteractiveRequire = dotnetInteractiveRequire;
-
-            window.configureRequireFromExtension = function(extensionName, extensionCacheBuster) {
-                let paths = {};
-                paths[extensionName] = `${root}extensions/${extensionName}/resources/`;
-                
-                let internalRequire = require.config({
-                    context: extensionCacheBuster,
-                    paths: paths,
-                    urlArgs: `cacheBuster=${extensionCacheBuster}`
-                    }) || require;
-
-                return internalRequire
-            };
-        
-            dotnetInteractiveRequire([
-                    'dotnet-interactive/dotnet-interactive'
-                ],
-                function (dotnet) {
-                    dotnet.init(window);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
-        })
-        .catch(error => {console.log(error);});
-    }
-
-// ensure `require` is available globally
-if ((typeof(require) !==  typeof(Function)) || (typeof(require.config) !== typeof(Function))) {
-    let require_script = document.createElement('script');
-    require_script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js');
-    require_script.setAttribute('type', 'text/javascript');
-    
-    
-    require_script.onload = function() {
-        loadDotnetInteractiveApi();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(require_script);
-}
-else {
-    loadDotnetInteractiveApi();
-}
-
-    </script>
-</div>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>-1 2 3
+4 5 6
 </pre>
 </div>
 </div>
@@ -7991,7 +7884,7 @@ else {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">use</span> <span class="o">.</span><span class="n">net</span><span class="o">-</span><span class="n">csharp</span>
@@ -8000,7 +7893,7 @@ else {
 <span class="n">public</span> <span class="k">class</span> <span class="nc">MyClass</span><span class="p">{</span>
     <span class="o">//</span><span class="n">Public</span> <span class="n">readonly</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">readonly</span> <span class="n">elements</span><span class="p">:</span>
     <span class="n">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">_myList</span><span class="p">;</span>
-    <span class="n">public</span> <span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">MyList</span> <span class="p">{</span> <span class="n">get</span> <span class="o">=&gt;</span> <span class="n">_myList</span><span class="p">;}</span>  
+    <span class="n">public</span> <span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">MyList</span>  <span class="o">=&gt;</span> <span class="n">_myList</span><span class="p">;</span>  
 
     <span class="n">public</span> <span class="n">MyClass</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="nb">list</span><span class="p">){</span>
         <span class="n">_myList</span><span class="o">=</span><span class="nb">list</span><span class="p">;</span>      
@@ -8229,28 +8122,27 @@ else {
 <h2>Use IList<t> (or combined type) for publicly-mutable C# lists</t></h2>
 <p>Best practice is to return read-only views and use methods to manipulate data.</p>
 <p>But what if we really want to start by just letting users write directly to a public list without setters?</p>
-<p>The list-like types in C# can be very confusing and standard examples aren't great. <strong>The easiest answer (slightly better answer below) if you must expose direct random access is a IList<t> from the start.</t></strong> And here's why:</p>
+<p><strong>The easiest answer if you must expose direct random access is a IList<t> from the start.</t></strong></p>
 <p>Many types can be emitted as IList simply as</p>
 <pre><code>public IList&lt;int&gt; MyList {get; set} = new Collection&lt;int&gt;(size);
 </code></pre>
 <p>So long as Collection or whatever type implements IList, and everything list does, even native C-syntax arrays, which are super fast.</p>
-<p>The private variable can be (re)implemented as a List<t> for performance, an Observable Collection for control, or a future custom class for internal performance and external control if needed, or whatever.  Users always get a IList.</t></p>
-<p><strong>The Downsides</strong></p>
+<p>The private variable can thus be (re)implemented as a List<t> for performance, an Observable Collection for control, or a future custom class for internal performance and external control if needed, or whatever.  Users always get a IList.</t></p>
+<p><strong>The nitty-gritty downsides</strong></p>
 <ol>
-<li><p>Oddly functions that don't change data, should take IReadOnlyList<t>.  This let's users know they won't change data, and helps the compiler optimize.  But IList doesn't implement IReadOnlyList.  So you have to pass MyList.AsReadonly(),  but that makes a shallow copy (slower).</t></p>
+<li><p>Oddly, functions that don't change data, should theoretically take IEnumberable<t> parameters for maximum flexibility, if random access isn't required, or  IReadOnlyList<t> if it is.  This let's users know they won't change data, and helps the compiler optimize.  But IList<t> doesn't implement IReadOnlyList<t>.  The prescribed way is  to pass MyList.AsReadonly(),  but that makes a shallow copy (slower).</t></t></t></t></p>
 </li>
-<li><p>Arrays are the fastest, but ironically they are slower than List when cast to IList.  I think this is a problem in the compiler.</p>
+<li><p>Arrays internally are the fastest, but ironically they are slower than List when cast to IList.  I think this is a problem in the compiler.</p>
 </li>
 </ol>
 <p><strong>Solutions to Downsides</strong></p>
 <ol>
-<li>If we end up really bothered about the copies to IReadOnly list, we can easily make combined type:</li>
-</ol>
-<pre><code>interface IComboList&lt;T&gt;: IList&lt;T&gt;, IReadOnlyList&lt;T&gt; {}
-</code></pre>
-<p>You can upgrade the property to this without breaking anything.  Simple.</p>
-<ol start="2">
-<li>If you need array performance again outside the producing class, consider if it's worth copying, or do a SAFE downcast:</li>
+<li><p>It's tempting to make a custom combined interface.  I'll add a link to why this should work but doesn't well.  The real solution is either</p>
+<p>a) Just accept IList<t> always for parameters.  This is common.  Just forget about using IReadOnly List. Supposedly it does produce some compiler optimizations though (which should happen anyway, but let's not get into that).</t></p>
+<p>b) Accept IReadOnlyList and explicitly cast from IList<t>.  In modern code almost everything that implments IList<t> also implements IReadOnlyList<t>.  And the opposite is even more true.   To be "proper" you can put the cast in a try-catch block that falls back to .AsReadonly().  When peformance isn't critical, just use .AsReadOnly().</t></t></t></p>
+</li>
+<li><p>If you need array performance again outside the producing class, consider if it's worth copying, or do a SAFE downcast:</p>
+</li>
 </ol>
 <pre><code>if ( (myarr = MyList as int[]) !=null) {
    ... stuff with myarr...
@@ -8258,8 +8150,8 @@ else {
    stuff with IList
 }
 </code></pre>
-<p>List is only a little faster than IList, but can check list too.  It does duplicate code though, which is annoying.</p>
-<p>Basically C# still let's us start easy and add in checks later with one catch, unless we roll our own custom collection derived from List, we need to have been returning by IList (see note below) instead of List from the start.  You cannot sublcass List element access, so there's no way to change internals if you didn't start with IList.</p>
+<p>List is only a little faster than IList, but can check for list too.  It does duplicate code though, which is annoying.</p>
+<p>Basically C# still let's us start easy and add in checks later with one catch, we need to have been returning by IList instead of List from the start.  You cannot sublcass List element access, so there's no way to change internals if you didn't start with IList.</p>
 </div>
 </div>
 </div>
@@ -8339,7 +8231,7 @@ replacement:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-sos"><pre><span></span><span class="o">%</span><span class="n">use</span> <span class="o">.</span><span class="n">net</span><span class="o">-</span><span class="n">csharp</span>
@@ -8420,111 +8312,10 @@ Correcting -1 in collection element 5
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Notes-on-types.">Notes on types.<a class="anchor-link" href="#Notes-on-types.">¶</a></h2><h4 id="Type-compatibility:">Type compatibility:<a class="anchor-link" href="#Type-compatibility:">¶</a></h4><p>You can cast the return (from the start) to any interface that ObservableCollection<t> (OC) implements. IList<t> is generally the best choice.</t></t></p>
-<p>It's tempting to just return a Collection<t> or ObservableCollection<t>, because both implement IList<t> but then you cannot as easily re-implement with a direct List<t> or T[] (C-like array). I'm still learning what's possible here, but for public parameters, IList is generally the most flexible.  For functions not meant for shared access, use whatever.
-IList gives you the flexibility to change implementation without breaking usage.</t></t></t></t></p>
+<h2 id="Notes-on-types.">Notes on types.<a class="anchor-link" href="#Notes-on-types.">¶</a></h2><h4 id="Type-compatibility:">Type compatibility:<a class="anchor-link" href="#Type-compatibility:">¶</a></h4><p>It's tempting to just return a Collection<t> or ObservableCollection<t>, because both implement IList<t> but then you cannot as easily or efficiently re-implement with a direct List<t> or T[] (C-like array) internally. For public parameters, IList<t> is generally the most flexible.  For functions not meant for shared access, use whatever.
+IList gives you the flexibility to change implementation without breaking usage.</t></t></t></t></t></p>
 <h3 id="Possibilities.">Possibilities.<a class="anchor-link" href="#Possibilities.">¶</a></h3><p>It's even <strong>possible</strong> to wire in attribute changes too, but quite a bit more involved.<br/>
 It's also possible to write a custom type that can use a list internally and emit an OC externally.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-sos"><pre><span></span><span class="n">using</span> <span class="n">System</span><span class="p">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Collections</span><span class="o">.</span><span class="n">ObjectModel</span><span class="p">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Collections</span><span class="o">.</span><span class="n">Specialized</span><span class="p">;</span>
-<span class="n">using</span> <span class="n">System</span><span class="o">.</span><span class="n">Linq</span><span class="p">;</span>
-
-<span class="n">public</span> <span class="n">interface</span> <span class="n">IComboList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="n">IList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">IReadOnlyList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">INotifyCollectionChanged</span> <span class="p">{</span> <span class="p">}</span>
-
-<span class="n">public</span> <span class="k">class</span> <span class="nc">MyObservableCollection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">:</span> <span class="n">ObservableCollection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">IComboList</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span>
-<span class="p">{</span>
-    <span class="n">public</span> <span class="n">MyObservableCollection</span><span class="p">(</span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">collection</span><span class="p">)</span> <span class="p">:</span> <span class="n">base</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="n">public</span> <span class="n">MyObservableCollection</span><span class="p">()</span> <span class="p">:</span> <span class="n">base</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="n">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
-<span class="p">{</span>
-    <span class="n">private</span> <span class="n">IComboList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">_myList</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyObservableCollection</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">};</span>
-    <span class="n">public</span> <span class="n">IComboList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">MyList</span>
-    <span class="p">{</span>
-        <span class="n">get</span> <span class="o">=&gt;</span> <span class="n">_myList</span><span class="p">;</span>
-        <span class="nb">set</span>
-        <span class="p">{</span>
-            <span class="n">var</span> <span class="n">newList</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyObservableCollection</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="err">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="n">x</span><span class="p">));</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">_myList</span> <span class="ow">is</span> <span class="n">INotifyCollectionChanged</span> <span class="n">oldCollection</span><span class="p">)</span>
-            <span class="p">{</span>
-                <span class="n">oldCollection</span><span class="o">.</span><span class="n">CollectionChanged</span> <span class="o">-=</span> <span class="n">MyList_CollectionChanged</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="n">_myList</span> <span class="o">=</span> <span class="n">newList</span><span class="p">;</span>
-            <span class="n">_myList</span><span class="o">.</span><span class="n">CollectionChanged</span> <span class="o">+=</span> <span class="n">MyList_CollectionChanged</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="n">private</span> <span class="n">void</span> <span class="n">MyList_CollectionChanged</span><span class="p">(</span><span class="nb">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">NotifyCollectionChangedEventArgs</span> <span class="n">e</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">NewItems</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">IList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">_myList</span> <span class="k">as</span> <span class="n">IList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">;</span> <span class="o">//</span> <span class="n">Use</span> <span class="n">pattern</span> <span class="n">matching</span> <span class="k">for</span> <span class="n">null</span> <span class="n">check</span>
-            <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">e</span><span class="o">.</span><span class="n">NewItems</span><span class="o">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-            <span class="p">{</span>
-                <span class="k">if</span> <span class="p">((</span><span class="nb">int</span><span class="p">)</span><span class="n">e</span><span class="o">.</span><span class="n">NewItems</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-                <span class="p">{</span>
-                    <span class="n">Console</span><span class="o">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="err">$</span><span class="s2">"Correcting -1 in collection element {e.NewStartingIndex + i}"</span><span class="p">);</span>
-                    <span class="nb">list</span><span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">NewStartingIndex</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">//</span> <span class="n">Correct</span> <span class="n">usage</span> <span class="n">using</span> <span class="n">IList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">Action</span> <span class="o">==</span> <span class="n">NotifyCollectionChangedAction</span><span class="o">.</span><span class="n">Reset</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">MyList</span> <span class="o">=</span> <span class="n">_myList</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="n">public</span> <span class="n">void</span> <span class="n">PrintList</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="n">Console</span><span class="o">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">Join</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="n">this</span><span class="o">.</span><span class="n">MyList</span><span class="p">));</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-        <span class="n">MyClass</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyClass</span><span class="p">();</span>
-        <span class="n">obj</span><span class="o">.</span><span class="n">PrintList</span><span class="p">();</span>
-        <span class="n">Console</span><span class="o">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s2">"replacement:"</span><span class="p">);</span>
-        <span class="n">obj</span><span class="o">.</span><span class="n">MyList</span> <span class="o">=</span> <span class="n">new</span> <span class="n">MyObservableCollection</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="p">{</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span> <span class="p">};</span>
-        <span class="n">obj</span><span class="o">.</span><span class="n">PrintList</span><span class="p">();</span>
-        <span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">MyList</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="o">//</span> <span class="n">Explicit</span> <span class="n">cast</span> <span class="n">still</span> <span class="n">needed</span> <span class="ow">in</span> <span class="n">Main</span>
-        <span class="p">((</span><span class="n">IList</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">)</span><span class="n">obj</span><span class="o">.</span><span class="n">MyList</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-        <span class="n">obj</span><span class="o">.</span><span class="n">MyList</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-        <span class="n">obj</span><span class="o">.</span><span class="n">PrintList</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>
-(63,9): error CS0121: The call is ambiguous between the following methods or properties: 'IList&lt;T&gt;.this[int]' and 'IReadOnlyList&lt;T&gt;.this[int]'
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre></pre>
-</div>
 </div>
 </div>
 </div>
@@ -8610,21 +8401,18 @@ KIM PARK DIPAK
 <p>In this example we don't even need an IReadOnlyList property, since we trap all changes to AnItem.Name.</p>
 <h2 id="Final-point-on-encapsulation:">Final point on encapsulation:<a class="anchor-link" href="#Final-point-on-encapsulation:">¶</a></h2><p>Encapsulation is great, but immutability is becoming even more popular, and removes many concerns.</p>
 <h2 id="Property-summary-C%23-vs-python">Property summary C# vs python<a class="anchor-link" href="#Property-summary-C%23-vs-python">¶</a></h2><p>(and C++)</p>
-<p><strong>1) Changes to non-list objects (in a list or not)</strong><br/>
-For custom non-list objects, or even lists of them, we can safely ignore properities until we need them, in both python and C#, if we're satisfied with the most indivisible object (attribute of attribute of object held by class) always handling the setter, and owners of those objects not always knowing about that.</p>
-<p><strong>2) C# Lists</strong><br/>
--For lists of values (immutable "objects" in Python) in C# we should take care to return List&lt;T&gt; as Collection&lt;T&gt; if we want to allow list element reassignment by users of the class.  Then we can easily catch it later if needed without breaking user code.  Alternatively, we can prevent list element reassignment from the start with a small bit of property syntax from the start with an Auto getter returning IReadOnlyList.  Both require a <em>little</em> forward planning, but not too much.</p>
-<p>-Python has no good solution to this other than planning from the start to make lists entirely immutable, or returning them as copies.</p>
-<p><strong>3) Advanced cases: Modification of objects in Lists</strong><br/>
-If we need to (continue to) allow and now catch modification of properties of list elements, and the containing class needs to know about them (not just the contained-object class as in (1)), well, that's not impossible in C# (or even python really, just more work), but it's more work (must wire/unwire ProperyChanged callbacks from all objects added to or removed from list) and has a performance hit.  This is getting <em>very</em> far away from slapping an @ property on anything.</p>
-<p><strong>4) If none of this is good enough, return a deep copy.</strong></p>
 <h2 id="Bottom-Line-and-best-practice-for-C%23-and-C++-data-types">Bottom Line and best practice for C# and C++ data types<a class="anchor-link" href="#Bottom-Line-and-best-practice-for-C%23-and-C++-data-types">¶</a></h2><p>Container access control in Python is pretty lousy.
 C# wins here by a lot with only a small amount of planning:</p>
 <ol>
-<li>C#: Return IReadonlyList<t> if possible.  Methods can still allow external manipulation.</t></li>
+<li>C#: Return IReadonlyList<t> of immutable, or mostly immutable objects if possible.</t></li>
 <li>C++20 equivalent: probaby span<const t="">  view of an internal vector.</const></li>
-<li>C#: Return Collection<t> if you really feel you must provide direct mutable access without methods.</t></li>
+<li>If objects must be mutable, encapsulate the objects themselves if that's sufficient (owners won't see changes though).</li>
+<li>C#: Return IList<t> (not IReadOnlyList) if you really feel you must provide direct mutable access without access methods.
+<strong>5) If none of this is good enough, return a deep copy.</strong></t></li>
 </ol>
+<p>Python has no good solutions other than planning from the start to make lists entirely immutable, or returning them as deep copies.</p>
+<p><strong>Advanced cases: Modification of objects in Lists</strong><br/>
+If we need to (continue to) allow and now catch modification of properties of list elements, and the containing class needs to know about them (not just the contained-object class as in (1)), well, that's not impossible in C# (or even python really, just more work), but it's more work (must wire/unwire ProperyChanged callbacks from all objects added to or removed from list) and has a performance hit.  This is getting <em>very</em> far away from slapping an @ property on anything.</p>
 <p>Much research on Notifications came from the "Output" box here:
 <a href="https://github.com/LeeCampbell/RxCookbook/blob/master/Model/CollectionChange.md">https://github.com/LeeCampbell/RxCookbook/blob/master/Model/CollectionChange.md</a></p>
 </div>
@@ -8651,7 +8439,7 @@ C# wins here by a lot with only a small amount of planning:</p>
 <li>It's obviously a scripting language. (advantage?)</li>
 <li>It has wide availability.</li>
 </ul>
-<h2 id="C%23:-Isn't-it-just-for-windows:">C#: Isn't it just for windows:<a class="anchor-link" href="#C%23:-Isn't-it-just-for-windows:">¶</a></h2><p>Not for the last few years. it installs easily on Ubuntu and builds and edits easily in vscode. In runs with jupyter using polyglot notebooks along side other languages <a href="./SoS-install.html">SoS multi-language Jupyter Notebook</a></p>
+<h2 id="C%23:-Isn't-it-just-for-windows:">C#: Isn't it just for windows:<a class="anchor-link" href="#C%23:-Isn't-it-just-for-windows:">¶</a></h2><p>Not for the last few years. it installs easily on Ubuntu and builds and edits easily in vscode. It runs with jupyter using polyglot notebooks along side other languages <a href="./SoS-install.html">SoS multi-language Jupyter Notebook</a></p>
 <h2 id="But-isn't-C%23-C-something-ish?">But isn't C# C-something-ish?<a class="anchor-link" href="#But-isn't-C%23-C-something-ish?">¶</a></h2><ul>
 <li><p>Well the syntax is familiar, yes.</p>
 </li>
@@ -8668,8 +8456,6 @@ C# wins here by a lot with only a small amount of planning:</p>
 <li><p>C# is very expressive.  List operations are amazing, with "LINQ" extensions removing loop operations to improve code brevity without sacrificing clarity.</p>
 </li>
 <li><p>Inheritance is cleanly divided into interfaces (accept anything IComparable to sort) and inheriting implementaion, with a preference for the former.</p>
-</li>
-<li><p>You never have to chase down inheritance trees to understand an object's methods.</p>
 </li>
 <li><p>C# is faster than python (about 4.5 times faster for a PE-MC I wrote)</p>
 </li>
@@ -8705,7 +8491,12 @@ C# wins here by a lot with only a small amount of planning:</p>
 <a href="http://accord-framework.net/">http://accord-framework.net/</a>
 Is free (LGPL, not GPL, so really free) and has a Metropolis Hastings Class of unknown usefulness, along with many machine learning codes.</p>
 <p>Other minimizers may be an issue.  Minuit is not ported, but could wrapped (it has a small API). It seems like MH MCMC is the future anyway, but lack of roostats could be a bummer.  ALGLIB looks interesting (MINUIT alternative) but none of these are maintained from within our field, and there's discussion this year, about getting the Hessian from ALGLIB, that seems unresolved.  Chisquared is mentioned, but not likelihood.</p>
-<h2 id="C%23-problems.">C# problems.<a class="anchor-link" href="#C%23-problems.">¶</a></h2><p>It doesn't have unique_ptrs.  Garbage collection doesn't let you set up-front demands on memory life, and can still lead to effective leaks.</p>
+<h2 id="C%23-problems.">C# problems.<a class="anchor-link" href="#C%23-problems.">¶</a></h2><ul>
+<li>It doesn't have unique_ptrs.</li>
+<li>Garbage collection doesn't let you set up-front demands on memory life, and can still lead to effective leaks.</li>
+<li>I'm seeing some issues with optimizaton of raw arrays in some situations.</li>
+<li>Type system has some gotchas.</li>
+</ul>
 <h2 id="Other-python-problems.">Other python problems.<a class="anchor-link" href="#Other-python-problems.">¶</a></h2><p>These are my personal peeves, my experience, not copied from any blog.</p>
 <ul>
 <li>For a scripting language, actually scripting (calling shell commands and parsing output) is surprisingly verbose and complicated.  It was the first thing I tackled in python <a href="https://gitlab.com/douglas.s.leonard/qx">Link</a>

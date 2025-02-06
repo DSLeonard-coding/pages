@@ -7539,22 +7539,6 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div>%use python3
-import sys
-print(sys.version)<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=03460f17-c1f1-4eb3-888b-51a81df7ce50">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-sos"><pre><span></span><span class="n">Next</span> <span class="n">looks</span> <span class="n">the</span> <span class="n">same</span><span class="err">!</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bbf02a4c-6bcf-49e1-8602-e341ada605cc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7709,11 +7693,11 @@ I didn't test that, and that alone might make up the difference to clang.</p>
 	cmp	rax, 10000000
 	jne	.LBB0_17
 </code></pre>
-<pre><code>Indexed:      1.00083 seconds  
-Pointer math  0.977032 seconds  
+<pre><code>Indexed:      0.083 seconds  
+Pointer math  0.083 seconds  
 </code></pre>
 <p>This is better than gcc because the inner loop is unrolled, diluting the loop overhead.</p>
-<p>(Note: lea breaks chain dependency and should allow the moves and adds to parallelize as opposed to add ecx 1, although it's hard to discern a difference.  clang kind of absurdly fully unrolls the outer loop toop, making 10 copies of this code for almost no gains.)</p>
+<p>(Note: lea breaks chain dependency and should allow the moves and adds to parallelize as opposed to add ecx 1.  clang kind of absurdly fully unrolls the outer loop toop, making 10 copies of this code for almost no gains.)</p>
 <p>But still, neither are using vectorized instructions and the reason seems to be they are afraid to because of the volatile declaration.  This is kind of silly but it's what they do, so...</p>
 </div>
 </div>
@@ -8145,7 +8129,7 @@ NumPy Vectorized fill: 0.255053 seconds
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Numba-with-typed-python-arrays-(no-numpy):">Numba with typed python arrays (no numpy):<a class="anchor-link" href="#Numba-with-typed-python-arrays-(no-numpy):">¶</a></h2><hr/>
+<h2 id="Numba-with-un-typed-python-arrays-(no-numpy):">Numba with un-typed python arrays (no numpy):<a class="anchor-link" href="#Numba-with-un-typed-python-arrays-(no-numpy):">¶</a></h2><hr/>
 <p>I just ran 10x less here, <strong>for same 1E8, it's 110s !!</strong></p>
 </div>
 </div>
