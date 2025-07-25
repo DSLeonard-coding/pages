@@ -12,10 +12,10 @@ Licenses are shown in each link.  If in doubt, all rights, reserved/ask, especia
 - [My wiki about how to unerstand git](https://gitlab.com/douglas.s.leonard/gitwiki)
 
 
-## Physics utilities:
+## Public Physics utilities/libraries:
 
 ---
-
+- [VolumeBuilder: A documented, streamlined, fluent geometry API for Geant4](https://douglas_s_leonard.gitlab.io/physics_utilities/VolumeBuilder/)
 - [alldat: Data read/write/conversion and utility clas for Ortec and root formats](https://gitlab.com/douglas.s.leonard/alldat)
 - [UAO2_PLTLY: Representative use of PLTLY.NET for interactive plots ]( https://gitlab.com/douglas.s.leonard/UAO2_PLTLY)
 
