@@ -15,13 +15,16 @@ Licenses are shown in each link.  If in doubt, all rights, reserved/ask, especia
 ## Public Physics utilities/libraries:
 
 ---
-- [VolumeBuilder: A documented, streamlined, fluent geometry API for Geant4](https://douglas_s_leonard.gitlab.io/physics_utilities/VolumeBuilder/)
+- **[DLG4::VolumeBuilders: A documented, streamlined, fluent geometry API for Geant4](https://douglas_s_leonard.gitlab.io/physics_utilities/VolumeBuilders/)**
 - [alldat: Data read/write/conversion and utility clas for Ortec and root formats](https://gitlab.com/douglas.s.leonard/alldat)
 - [UAO2_PLTLY: Representative use of PLTLY.NET for interactive plots ]( https://gitlab.com/douglas.s.leonard/UAO2_PLTLY)
 
 ## Misc utilities:
 
 ---
+
+### **git**
+- [git-alltrees subtree behavior with root-tree compliment and seamless merge history (no-squash/duplicates)](https://gitlab.com/douglas.s.leonard/alltrees/-/wikis/home)
 
 ### **python:** (mostly packaged for pip use)
 - [qx: Console command/log-level convenience utility for phython](https://gitlab.com/douglas.s.leonard/qx)  This one is pretty handy for CLI scripting.
