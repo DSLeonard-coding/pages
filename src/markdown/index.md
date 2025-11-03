@@ -48,6 +48,8 @@ Licenses are shown in each link.  If in doubt, all rights, reserved/ask, especia
 - [HpgeSim-distrib:  Same as above but without proprietary models, may not be as updated](https://gitlab.com/douglas.s.leonard/HpgeSim)
 - [HpgeAnalys:  Data processing pipeline/event-/histogram-builder for CUP HPGe data and sims](https://gitlab.com/douglas.s.leonard/HpgeSim)  Shares event selection and usage interface for Sim/Data.
 - [gdcodes/gdfit: Branching/Intensity-constrained multi-activity peak fitting targetting HPGe](https://gitlab.com/douglas.s.leonard/gdcodes) This code has a lot of history.  It shows, but it works. Used originally for NAA analysis in EXO, although that was an adaptation too. Uses alldat for data reading.  Now includes a python API for automation.
+- [Decay coincidence toy MC generator in C#](https://gitlab.com/douglas.s.leonard/decay_mc_cs) Intended for alpha coincidence analysis for DES measurements.
+- [Decay coincidence toy MC generator, original python version](https://gitlab.com/douglas.s.leonard/decay_MC)
 
 ## Comming soon:
 
@@ -63,4 +65,3 @@ Licenses are shown in each link.  If in doubt, all rights, reserved/ask, especia
 
 This is a gitlab-pages page.  The underlying repo is here: [Link](https://gitlab.com/douglas_s_leonard/pages).
 I just use scripts to generate static html in public/  and the only thing needed to publish on gitlab is the .gitlab-ci.yml and enabling pages in the project.
-
